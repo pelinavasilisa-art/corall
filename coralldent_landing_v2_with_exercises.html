@@ -1,0 +1,322 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .landing { width: 100%; font-family: 'Helvetica Neue', Arial, sans-serif; color: #262b6d; background: #fff; }
+
+  .hero {
+    background: linear-gradient(135deg, #ffc3fb 0%, #c5e2ff 40%, #b8a8f8 70%, #262b6d 100%);
+    padding: 60px 40px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-logo { font-size: 13px; font-weight: 500; letter-spacing: 3px; color: #262b6d; text-transform: uppercase; margin-bottom: 40px; opacity: 0.8; }
+  .hero h1 { font-size: clamp(24px, 4vw, 42px); font-weight: 700; line-height: 1.2; color: #262b6d; max-width: 700px; margin: 0 auto 20px; }
+  .hero h1 span { color: #0e2af3; }
+  .hero-sub { font-size: clamp(15px, 2vw, 18px); color: #262b6d; max-width: 600px; margin: 0 auto 16px; opacity: 0.85; line-height: 1.6; }
+  .hero-clinic { font-size: 14px; color: #262b6d; opacity: 0.7; margin-bottom: 36px; font-style: italic; }
+  .btn-primary { background: #262b6d; color: #fff; border: none; padding: 16px 40px; font-size: 16px; font-weight: 600; border-radius: 50px; cursor: pointer; display: inline-block; text-decoration: none; }
+  .coral-sign { position: absolute; opacity: 0.08; font-size: 300px; font-weight: 900; color: #0e2af3; top: -60px; right: -40px; pointer-events: none; letter-spacing: -20px; }
+
+  .section { padding: 60px 40px; }
+  .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #0e2af3; margin-bottom: 12px; font-weight: 500; }
+  .section h2 { font-size: clamp(22px, 3vw, 34px); font-weight: 700; line-height: 1.25; margin-bottom: 16px; color: #262b6d; }
+  .section-text { font-size: 16px; line-height: 1.75; color: #444; max-width: 680px; }
+
+  .problem-bg { background: linear-gradient(160deg, #f0eaff 0%, #e8f4ff 100%); }
+  .stat-highlight { font-size: clamp(36px, 5vw, 64px); font-weight: 900; color: #0e2af3; line-height: 1; margin: 24px 0 8px; }
+  .habits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 32px; }
+  .habit-card { background: white; border-radius: 16px; padding: 20px; border-left: 4px solid #0e2af3; }
+  .habit-card h4 { font-size: 14px; font-weight: 700; color: #262b6d; margin-bottom: 6px; }
+  .habit-card p { font-size: 13px; color: #666; line-height: 1.5; }
+
+  .school-bg { background: #262b6d; color: white; }
+  .school-bg .section-label { color: #ffc3fb; }
+  .school-bg h2 { color: white; }
+  .school-bg .section-text { color: rgba(255,255,255,0.8); }
+  .audience-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+  .audience-card { background: rgba(255,255,255,0.08); border-radius: 20px; padding: 28px 24px; border: 1px solid rgba(255,255,255,0.15); }
+  .age-badge { display: inline-block; background: #ffc3fb; color: #262b6d; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; margin-bottom: 14px; letter-spacing: 1px; text-transform: uppercase; }
+  .age-badge.blue { background: #c5e2ff; }
+  .audience-card h3 { font-size: 17px; font-weight: 700; color: white; margin-bottom: 12px; }
+  .audience-card ul { list-style: none; padding: 0; }
+  .audience-card ul li { font-size: 14px; color: rgba(255,255,255,0.75); padding: 6px 0 6px 18px; border-bottom: 1px solid rgba(255,255,255,0.07); line-height: 1.5; position: relative; }
+  .audience-card ul li::before { content: '—'; position: absolute; left: 0; color: #ffc3fb; font-weight: 700; }
+
+  .exercises-bg { background: linear-gradient(160deg, #f0eaff 0%, #e8f4ff 100%); }
+  .exercises-intro { font-size: 16px; color: #444; max-width: 680px; line-height: 1.7; margin-bottom: 32px; }
+  .ex-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .ex-card { background: white; border-radius: 20px; padding: 28px 24px; border: 1px solid #e0daf5; }
+  .ex-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: #0e2af3; color: white; border-radius: 50%; font-size: 16px; font-weight: 700; margin-bottom: 14px; }
+  .ex-tag { display: inline-block; background: #ffc3fb; color: #262b6d; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .ex-card h3 { font-size: 16px; font-weight: 700; color: #262b6d; margin-bottom: 10px; }
+  .ex-card p { font-size: 14px; color: #555; line-height: 1.65; margin-bottom: 10px; }
+  .ex-how { background: #f0eaff; border-radius: 10px; padding: 12px 14px; }
+  .ex-how-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #0e2af3; font-weight: 700; margin-bottom: 5px; }
+  .ex-how p { font-size: 13px; color: #444; margin: 0; line-height: 1.55; }
+
+  .doctor-bg { background: linear-gradient(135deg, #ffc3fb 0%, #c5e2ff 60%, #e8f0ff 100%); }
+  .doctor-card { display: grid; grid-template-columns: 200px 1fr; gap: 36px; align-items: start; background: white; border-radius: 24px; padding: 36px; margin-top: 32px; max-width: 780px; }
+  .doctor-photo { width: 200px; height: 240px; border-radius: 16px; background: linear-gradient(160deg, #c5e2ff, #ffc3fb); display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+  .doctor-photo svg { width: 90px; height: 90px; opacity: 0.4; }
+  .doctor-name { font-size: 22px; font-weight: 800; color: #262b6d; margin-bottom: 4px; }
+  .doctor-title { font-size: 14px; color: #0e2af3; font-weight: 600; margin-bottom: 16px; }
+  .edu-list { list-style: none; padding: 0; margin-bottom: 20px; }
+  .edu-list li { font-size: 13px; color: #444; padding: 5px 0 5px 20px; position: relative; line-height: 1.45; border-bottom: 1px solid #f0f0f0; }
+  .edu-list li::before { content: '✦'; position: absolute; left: 0; color: #0e2af3; font-size: 10px; top: 7px; }
+  .guide-teaser { background: linear-gradient(120deg, #262b6d, #0e2af3); color: white; border-radius: 14px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; cursor: pointer; }
+  .guide-icon { width: 44px; height: 44px; background: rgba(255,255,255,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 20px; }
+  .guide-teaser h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .guide-teaser p { font-size: 12px; opacity: 0.75; }
+
+  .guide-section { background: linear-gradient(160deg, #0e2af3 0%, #262b6d 100%); padding: 60px 40px; color: white; text-align: center; }
+  .guide-section .section-label { color: #ffc3fb; }
+  .guide-section h2 { color: white; font-size: clamp(22px,3vw,34px); margin-bottom: 16px; }
+  .guide-section .section-text { color: rgba(255,255,255,0.8); margin: 0 auto 32px; }
+  .guide-box { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 32px; max-width: 500px; margin: 0 auto 28px; }
+  .guide-box h3 { font-size: 20px; font-weight: 700; color: white; margin-bottom: 12px; }
+  .guide-checklist { list-style: none; padding: 0; text-align: left; margin-top: 16px; }
+  .guide-checklist li { font-size: 14px; color: rgba(255,255,255,0.8); padding: 7px 0 7px 24px; position: relative; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .guide-checklist li::before { content: '✓'; position: absolute; left: 0; color: #ffc3fb; font-weight: 700; }
+  .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn-outline-white { background: transparent; color: white; border: 2px solid rgba(255,255,255,0.5); padding: 14px 32px; font-size: 15px; font-weight: 600; border-radius: 50px; cursor: pointer; text-decoration: none; }
+  .btn-pink { background: #ffc3fb; color: #262b6d; border: none; padding: 14px 32px; font-size: 15px; font-weight: 700; border-radius: 50px; cursor: pointer; text-decoration: none; }
+
+  .reviews-bg { background: #f7f5ff; }
+  .reviews-intro { font-size: 16px; color: #444; max-width: 680px; line-height: 1.7; margin-bottom: 32px; font-style: italic; }
+  .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .review-card { background: white; border-radius: 20px; padding: 24px; border: 1px solid #e8e4f8; }
+  .reviewer { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px; flex-shrink: 0; }
+  .av-pink { background: #ffc3fb; color: #262b6d; }
+  .av-blue { background: #c5e2ff; color: #0e2af3; }
+  .av-purple { background: #e8e4f8; color: #262b6d; }
+  .reviewer-name { font-size: 14px; font-weight: 700; color: #262b6d; }
+  .reviewer-sub { font-size: 12px; color: #888; }
+  .review-text { font-size: 14px; color: #444; line-height: 1.65; }
+  .video-placeholder { background: linear-gradient(120deg, #262b6d, #0e2af3); border-radius: 12px; height: 140px; display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 14px; cursor: pointer; }
+  .play-btn { width: 48px; height: 48px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid rgba(255,255,255,0.5); }
+  .play-btn::after { content: ''; width: 0; height: 0; border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 16px solid white; margin-left: 4px; }
+  .video-label { font-size: 11px; color: rgba(255,255,255,0.6); margin-top: 8px; letter-spacing: 1px; text-transform: uppercase; }
+
+  .footer-cta { background: linear-gradient(135deg, #ffc3fb 0%, #c5e2ff 50%, #b8a8f8 100%); padding: 60px 40px; text-align: center; }
+  .footer-cta h2 { font-size: clamp(22px, 3vw, 36px); font-weight: 800; color: #262b6d; margin-bottom: 12px; }
+  .footer-cta p { font-size: 16px; color: #262b6d; opacity: 0.8; max-width: 500px; margin: 0 auto 32px; line-height: 1.6; }
+  .footer-note { font-size: 12px; color: #262b6d; opacity: 0.5; margin-top: 20px; }
+
+  @media (max-width: 600px) {
+    .section { padding: 48px 24px; }
+    .hero { padding: 48px 24px 64px; }
+    .audience-tabs { grid-template-columns: 1fr; }
+    .doctor-card { grid-template-columns: 1fr; }
+    .doctor-photo { width: 100%; height: 200px; }
+    .guide-section { padding: 48px 24px; }
+    .footer-cta { padding: 48px 24px; }
+  }
+</style>
+
+<div class="landing">
+
+  <div class="hero">
+    <div class="coral-sign">ll</div>
+    <div class="hero-logo">CORALLDENT</div>
+    <h1>Как вырастить ребёнка<br>с <span>ровными зубами</span><br>без боли и брекетов?</h1>
+    <p class="hero-sub">Открытая Школа юного стоматолога для родителей и детей под руководством врача-ортодонта Лилии Востриковой</p>
+    <p class="hero-clinic">Семейная стоматология «Коралдент» · Астрахань</p>
+    <a href="#school" class="btn-primary">Записаться в Школу</a>
+  </div>
+
+  <div class="section problem-bg">
+    <p class="section-label">Почему это важно</p>
+    <h2>Кариес и кривые зубы —<br>это не генетика</h2>
+    <p class="section-text">В большинстве случаев проблемы с зубами и прикусом — следствие страха перед стоматологом, пагубных привычек и отсутствия профилактики с раннего детства.</p>
+    <div class="stat-highlight">80%</div>
+    <p class="section-text" style="margin-bottom: 8px;">случаев кривых зубов, неправильного прикуса и даже сутулости можно предотвратить при своевременной профилактике.</p>
+    <div class="habits-grid">
+      <div class="habit-card">
+        <h4>Ротовое дыхание</h4>
+        <p>Деформирует челюсть и нарушает развитие лица уже с 3–4 лет</p>
+      </div>
+      <div class="habit-card">
+        <h4>Сосание пальца</h4>
+        <p>Формирует открытый прикус и смещает зубные ряды</p>
+      </div>
+      <div class="habit-card">
+        <h4>Страх перед врачом</h4>
+        <p>Заставляет откладывать лечение до запущенных стадий</p>
+      </div>
+      <div class="habit-card">
+        <h4>Положение во сне</h4>
+        <p>Влияет на рост челюстей — об этом мало кто знает</p>
+      </div>
+      <div class="habit-card">
+        <h4>Отсутствие профилактики</h4>
+        <p>Первый осмотр у ортодонта должен быть в 6–7 лет, не позже</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section school-bg" id="school">
+    <p class="section-label">Что такое Школа</p>
+    <h2>Просветительский проект<br>для всей семьи</h2>
+    <p class="section-text">Мы учим профилактике — так, чтобы вы и ваш ребёнок не боялись стоматолога и контролировали здоровье зубов с пелёнок.</p>
+    <div class="audience-tabs">
+      <div class="audience-card">
+        <span class="age-badge">Дети 7–12 лет</span>
+        <h3>Игровые мастер-классы</h3>
+        <ul>
+          <li>Примеряют роль врача — в настоящем кресле</li>
+          <li>Вычищают «кариес», ставят учебные пломбы</li>
+          <li>Учатся правильно чистить зубы</li>
+          <li>Перестают бояться стоматологов навсегда</li>
+        </ul>
+      </div>
+      <div class="audience-card">
+        <span class="age-badge blue">Родители</span>
+        <h3>Занятия с ортодонтом</h3>
+        <ul>
+          <li>Связь между сном ребёнка и ростом челюстей</li>
+          <li>5 привычек, которые ломают прикус</li>
+          <li>Когда пора к ортодонту — и зачем идти в 6 лет</li>
+          <li>Профилактика без брекетов: что реально работает</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section exercises-bg">
+    <p class="section-label">Упражнения от Лилии Востриковой</p>
+    <h2>3 упражнения, которые<br>вы можете начать сегодня</h2>
+    <p class="exercises-intro">Эти упражнения входят в международные миофункциональные программы (MRC/Myobrace, OMT) и используются ортодонтами по всему миру. Они безопасны, просты и подходят детям с 5–6 лет.</p>
+
+    <div class="ex-grid">
+      <div class="ex-card">
+        <div class="ex-num">1</div>
+        <div class="ex-tag">Дыхание</div>
+        <h3>Носовое дыхание в покое</h3>
+        <p>Закрытый рот, дыхание только через нос — это базовый навык, без которого остальная профилактика работает хуже. Ротовое дыхание деформирует челюсть уже с 3–4 лет.</p>
+        <div class="ex-how">
+          <div class="ex-how-label">Как делать</div>
+          <p>Сядьте с ребёнком, сомкните губы — не напрягая подбородок. Подышите тихо через нос 1–2 минуты. Проверьте: нет ли шума при дыхании. Делать 2–3 раза в день, особенно перед сном.</p>
+        </div>
+      </div>
+
+      <div class="ex-card">
+        <div class="ex-num">2</div>
+        <div class="ex-tag">Язык</div>
+        <h3>Язык на нёбо в покое</h3>
+        <p>Правильное положение языка в покое — это главная цель большинства ортодонтических миофункциональных программ. Язык должен касаться нёба, а не лежать на дне рта или давить на зубы.</p>
+        <div class="ex-how">
+          <div class="ex-how-label">Как делать</div>
+          <p>Попросите ребёнка цокнуть языком — это и есть нужная точка. Теперь пусть мягко прижмёт язык к нёбу и удерживает 10–15 секунд, дыша носом. Повторять 5–10 раз утром и вечером.</p>
+        </div>
+      </div>
+
+      <div class="ex-card">
+        <div class="ex-num">3</div>
+        <div class="ex-tag">Глотание</div>
+        <h3>Правильное глотание слюны</h3>
+        <p>Атипичное глотание (когда язык толкает зубы при каждом глотке) — одна из самых частых причин открытого прикуса. Ребёнок глотает 600–1000 раз в день: каждый неправильный глоток давит на зубы.</p>
+        <div class="ex-how">
+          <div class="ex-how-label">Как делать</div>
+          <p>Губы смыкаются, язык поднимается к нёбу — и только потом происходит глоток. Попробуйте вместе перед зеркалом. Проследите, чтобы язык не высовывался между зубами. Отрабатывать 5–7 раз за раз.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section doctor-bg">
+    <p class="section-label">Эксперт</p>
+    <h2>Лилия Вострикова</h2>
+    <p class="section-text">Врач-ортодонт клиники «Коралдент» с многолетним опытом работы с детьми и семьями.</p>
+    <div class="doctor-card">
+      <div class="doctor-photo">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="35" r="22" fill="#262b6d"/>
+          <path d="M10 90 C10 65 90 65 90 90" fill="#262b6d"/>
+        </svg>
+      </div>
+      <div>
+        <div class="doctor-name">Вострикова Лилия Владимировна</div>
+        <div class="doctor-title">Врач стоматолог-ортодонт</div>
+        <ul class="edu-list">
+          <li>Специализация: детская и взрослая ортодонтия</li>
+          <li>Профессиональный курс «Ортодонтия без брекетов»</li>
+          <li>Сертификат по миофункциональной терапии</li>
+          <li>Обучение в Европейской академии ортодонтии</li>
+          <li>Автор методики ранней профилактики для детей 4–7 лет</li>
+        </ul>
+        <div class="guide-teaser">
+          <div class="guide-icon">📖</div>
+          <div>
+            <h4>У Лилии Владимировны есть бесплатный гайд</h4>
+            <p>«5 привычек, которые портят прикус» — получите ниже</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="guide-section">
+    <p class="section-label">Бесплатный гайд</p>
+    <h2>«5 привычек, которые<br>портят прикус вашего ребёнка»</h2>
+    <p class="section-text">Практический гайд от ортодонта Лилии Востриковой — скачайте бесплатно и начните сегодня</p>
+    <div class="guide-box">
+      <h3>Что внутри:</h3>
+      <ul class="guide-checklist">
+        <li>Как определить ротовое дыхание у ребёнка</li>
+        <li>Почему важно положение языка в покое</li>
+        <li>Чек-лист: 10 признаков риска неправильного прикуса</li>
+        <li>Упражнения для формирования правильного прикуса дома</li>
+        <li>Когда и зачем идти к ортодонту первый раз</li>
+      </ul>
+    </div>
+    <div class="cta-buttons">
+      <a href="#" class="btn-pink">Получить в Telegram</a>
+      <a href="#" class="btn-outline-white">Написать в WhatsApp</a>
+    </div>
+  </div>
+
+  <div class="section reviews-bg">
+    <p class="section-label">Отзывы</p>
+    <h2>Родители о Школе и гайде</h2>
+    <p class="reviews-intro">Ниже — реальные мамы и папы, которые пришли на наш семинар и опробовали советы Лилии Владимировны дома</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="video-placeholder"><div class="play-btn"></div><div class="video-label">Видеоотзыв</div></div>
+        <div class="reviewer">
+          <div class="avatar av-pink">АМ</div>
+          <div><div class="reviewer-name">Анна М.</div><div class="reviewer-sub">Мама двоих детей, 8 и 5 лет</div></div>
+        </div>
+        <p class="review-text">«После семинара дочка сама напоминает про зубную щётку. И главное — перестала бояться! На прошлом приёме сидела спокойно — это просто чудо для нас.»</p>
+      </div>
+      <div class="review-card">
+        <div class="video-placeholder"><div class="play-btn"></div><div class="video-label">Видеоотзыв</div></div>
+        <div class="reviewer">
+          <div class="avatar av-blue">ОК</div>
+          <div><div class="reviewer-name">Олег К.</div><div class="reviewer-sub">Папа сына 10 лет</div></div>
+        </div>
+        <p class="review-text">«Я не знал, что ротовое дыхание так влияет на прикус. Скачал гайд, проверили сына — оказалось, у нас именно эта проблема. Теперь занимаемся.»</p>
+      </div>
+      <div class="review-card">
+        <div class="video-placeholder"><div class="play-btn"></div><div class="video-label">Видеоотзыв</div></div>
+        <div class="reviewer">
+          <div class="avatar av-purple">ЕС</div>
+          <div><div class="reviewer-name">Екатерина С.</div><div class="reviewer-sub">Мама дочери 7 лет</div></div>
+        </div>
+        <p class="review-text">«На мастер-классе ребёнок сам «полечил» зубик кукле — теперь просится к стоматологу! Лилия Владимировна объяснила всё доступно и без страшилок.»</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-cta">
+    <h2>Запишитесь в Школу<br>юного стоматолога</h2>
+    <p>Ближайшие занятия уже скоро. Места ограничены — Лилия Владимировна работает с небольшими группами.</p>
+    <div class="cta-buttons">
+      <a href="#" class="btn-primary">Записаться в Telegram</a>
+      <a href="#" class="btn-outline-white" style="border-color: #262b6d; color: #262b6d;">Записаться в WhatsApp</a>
+    </div>
+    <p class="footer-note">Клиника «Коралдент» · ул. Кирова, 54, 2 этаж, Астрахань · coralldent.ru</p>
+  </div>
+
+</div>
